@@ -1,0 +1,56 @@
+<!-- TESTANDO RETIRAR O PARTIAL E CRIAR UM FORM ESPECÍFICO PARA NEW -->
+
+<% content_for :title, "New contact" %>
+
+<h1>Novo Contato</h1>
+
+<%= form_with(model: @contact) do |form| %>
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <!-- Campo de seleção de empresa -->
+  <div class="field">
+    <%= form.label :company_id, "Selecione a Empresa" %>
+    <%= form.select :company_id, 
+        options_from_collection_for_select(Company.all, :id, :company_name, @contact.company_id), 
+        { include_blank: "Selecione uma empresa" }, 
+        { class: "form-control" } %>
+  </div>
+
+  <div data-controller="hello">
+    Este elemento usa o HelloController.
+  </div>
+  
+  <!-- Campo de função -->
+  <div class="field">
+    <%= form.label :role, "Função" %>
+    <%= form.select :role, Contact.roles, prompt: "Selecione uma função" %>
+  </div>
+
+  <!-- Campo de departamento -->
+  <div class="field">
+    <%= form.label :department, "Departamento" %>
+    <%= form.select :department, Contact.departments, prompt: "Selecione um departamento" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

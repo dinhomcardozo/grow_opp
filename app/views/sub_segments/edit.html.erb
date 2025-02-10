@@ -1,0 +1,12 @@
+<% content_for :title, "Editing sub segment" %>
+
+<h1>Editing sub segment</h1>
+
+<%= render "form", sub_segment: @sub_segment %>
+
+<br>
+
+<div>
+  <%= link_to "Show this sub segment", @sub_segment %> |
+  <%= link_to "Back to sub segments", sub_segments_path %>
+</div>

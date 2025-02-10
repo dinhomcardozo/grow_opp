@@ -1,0 +1,69 @@
+<%= form_with model: @opportunity do |form| %>
+  <% if @opportunity.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@opportunity.errors.count, "erro") %> impediram que esta oportunidade fosse salva:</h2>
+      <ul>
+        <% @opportunity.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :contact_id, "Contato" %>
+    <%= form.collection_select :contact_id, Contact.all, :id, :full_name, { include_blank: "Selecione um contato" }, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.label :email, "E-mail" %>
+    <%= form.text_field :email, readonly: true, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.label :phone, "Telefone" %>
+    <%= form.text_field :phone, readonly: true, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.label :cnpj, "CNPJ" %>
+    <%= form.text_field :cnpj, readonly: true, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.label :company_name, "Razão Social" %>
+    <%= form.text_field :company_name, readonly: true, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.label :notes, "Anotações" %>
+    <%= form.text_area :notes, rows: 5, class: 'form-control' %>
+  </div>
+
+  <h3>Produtos</h3>
+  <%= form.fields_for :opportunity_products do |op_form| %>
+    <div>
+      <%= op_form.label :product_id, "Produto" %>
+      <%= op_form.collection_select :product_id, Product.all, :id, :description, { include_blank: "Selecione um produto" }, class: 'form-control' %>
+    </div>
+
+    <div>
+      <%= op_form.label :quantity, "Quantidade" %>
+      <%= op_form.number_field :quantity, class: 'form-control', min: 1 %>
+    </div>
+
+    <div>
+      <%= op_form.label :discount, "Desconto (R$)" %>
+      <%= op_form.number_field :discount, class: 'form-control', step: 0.01, min: 0 %>
+    </div>
+
+    <div>
+      <%= op_form.label :subtotal_price, "Subtotal (R$)" %>
+      <%= op_form.number_field :subtotal_price, readonly: true, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit "Salvar", class: 'btn btn-primary' %>
+  </div>
+<% end %>

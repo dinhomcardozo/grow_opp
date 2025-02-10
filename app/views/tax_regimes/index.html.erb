@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Tax regimes" %>
+
+<h1>Tax regimes</h1>
+
+<div id="tax_regimes">
+  <% @tax_regimes.each do |tax_regime| %>
+    <%= render tax_regime %>
+    <p>
+      <%= link_to "Show this tax regime", tax_regime %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New tax regime", new_tax_regime_path %>

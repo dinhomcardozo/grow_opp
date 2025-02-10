@@ -1,0 +1,28 @@
+<!-- app/views/opportunities/_opportunity_products.html.erb -->
+<div id="opportunity-products">
+  <table>
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Preço Unitário</th>
+        <th>Quantidade</th>
+        <th>Subtotal</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= form.fields_for :opportunity_products do |product_fields| %>
+        <%= render 'opportunity_product_fields', form: product_fields %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div>
+    <%= link_to_add_association 'Adicionar Produto', form, :opportunity_products, partial: 'opportunity_product_fields' %>
+  </div>
+
+  <div>
+    <strong>Total:</strong>
+    <span id="total-price">0.00</span>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<h1>Lista de Marcas</h1>
+
+<%= link_to 'Nova Marca', new_brand_path, class: 'btn btn-primary mb-3' %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @brands.each do |brand| %>
+      <tr>
+        <td><%= brand.id %></td>
+        <td><%= brand.name %></td>
+        <td><%= brand.status ? 'Ativo' : 'Inativo' %></td>
+        <td>
+          <%= link_to 'Editar', edit_brand_path(brand), class: 'btn btn-sm btn-warning' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

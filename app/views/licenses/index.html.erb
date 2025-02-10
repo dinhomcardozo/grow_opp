@@ -1,0 +1,33 @@
+<h1>Licenças</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Anos</th>
+      <th>Meses</th>
+      <th>Dias</th>
+      <th>Total (dias)</th>
+      <th>Ações</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @licenses.each do |license| %>
+      <tr>
+        <td><%= license.description %></td>
+        <td><%= license.license_years %></td>
+        <td><%= license.license_months %></td>
+        <td><%= license.license_days %></td>
+        <td><%= license.total_duration_in_days %></td>
+        <td><%= license.status %></td>
+        <td>
+          <%= link_to 'Editar', edit_license_path(license), class: 'btn btn-sm btn-warning' %>
+          <%= button_to 'Excluir', license_path(license), method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-sm btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Nova Licença', new_license_path, class: 'btn btn-primary' %>

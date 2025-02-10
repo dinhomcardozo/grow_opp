@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Sub segments" %>
+
+<h1>Sub segments</h1>
+
+<div id="sub_segments">
+  <% @sub_segments.each do |sub_segment| %>
+    <%= render sub_segment %>
+    <p>
+      <%= link_to "Show this sub segment", sub_segment %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New sub segment", new_sub_segment_path %>

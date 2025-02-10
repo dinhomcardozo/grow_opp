@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sub_segment_name: MyString
+  status: false
+  segment: one
+
+two:
+  sub_segment_name: MyString
+  status: false
+  segment: two

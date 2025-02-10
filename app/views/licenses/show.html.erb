@@ -1,0 +1,19 @@
+<h1>Detalhes da Licença</h1>
+
+<p>
+  <strong>Descrição:</strong>
+  <%= @license.description %>
+</p>
+
+<p>
+  <strong>Duração Total:</strong>
+  <%= @license.total_duration_in_days %> dias
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @license.status ? 'Ativo' : 'Inativo' %>
+</p>
+
+<%= link_to 'Editar', edit_license_path(@license), class: 'btn btn-warning' %>
+<%= link_to 'Voltar', licenses_path, class: 'btn btn-secondary' %>

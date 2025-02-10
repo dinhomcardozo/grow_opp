@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tax_regime_name: MyString
+  status: false
+
+two:
+  tax_regime_name: MyString
+  status: false

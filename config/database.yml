@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: postgres
+  password: h4rdc0r3
+  host: localhost
+
+development:
+  <<: *default
+  database: grow_opp_dev
+
+test:
+  <<: *default
+  database: grow_opp_test
+
+#production:
+#  <<: *default
+#  database: grow_opp_production
+#  username: bookshelf
+#  password: <%= ENV['BOOKSHELF_DATABASE_PASSWORD'] %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @sub_segment %>
+
+<div>
+  <%= link_to "Edit this sub segment", edit_sub_segment_path(@sub_segment) %> |
+  <%= link_to "Back to sub segments", sub_segments_path %>
+
+  <%= button_to "Destroy this sub segment", @sub_segment, method: :delete %>
+</div>

@@ -1,0 +1,12 @@
+<% content_for :title, "Editing tax regime" %>
+
+<h1>Editing tax regime</h1>
+
+<%= render "form", tax_regime: @tax_regime %>
+
+<br>
+
+<div>
+  <%= link_to "Show this tax regime", @tax_regime %> |
+  <%= link_to "Back to tax regimes", tax_regimes_path %>
+</div>

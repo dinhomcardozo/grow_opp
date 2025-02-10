@@ -1,0 +1,46 @@
+/----------------------- Github
+
+Terminal Gitbash apenas aberto:
+
+git init
+
+git status
+
+git add .
+
+git status
+
+
+--- 
+
+git commit -m "primeiro commit"
+
+git branch -M main (só depois do commit)
+
+git remote add origin https://github.com/dinhomcardozo/ellipsis_olm.git (pode retornar que já existe...)
+
+git push -u origin main
+
+
+/ ------------------------ Docker
+
+Execute o seguinte comando para iniciar os containers:
+
+    docker-compose up
+
+Reiniciar Docker - Para e remove containers antigos:
+
+    docker-compose down
+
+Construir a imagem:
+
+    docker-compose build
+    docker-compose up --build
+
+Verificar se as Dependências Foram Atualizadas:
+
+    docker-compose exec web bundle check
+
+Lista todos os containers em execução:
+
+    docker ps

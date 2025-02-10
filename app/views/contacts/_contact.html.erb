@@ -1,0 +1,33 @@
+<!-- app/views/contacts/_contact.html.erb -->
+<div class="contact">
+  <p>
+    <strong>Primeiro nome:</strong>
+    <%= contact.first_name %>
+  </p>
+  <p>
+    <strong>Sobrenome:</strong>
+    <%= contact.last_name %>
+  </p>
+  <p>
+    <strong>Email:</strong>
+    <%= contact.email %>
+  </p>
+  <p>
+    <strong>Telefone:</strong>
+    <%= contact.phone %>
+  </p>
+  <p>
+    <strong>Empresa:</strong>
+    <%= contact.company&.company_name %>
+  </p>
+  <p>
+    <strong>Função:</strong>
+    <%= contact.role %>
+  </p>
+  <p>
+    <strong>Departamento:</strong>
+    <%= contact.department %>
+  </p>
+  <%= link_to 'Editar', edit_contact_path(contact) %> |
+  <%= link_to 'Voltar', contacts_path %>
+</div>

@@ -1,0 +1,21 @@
+<!-- app/views/opportunities/_opportunity_product_fields.html.erb -->
+<tr class="nested-fields">
+  <td>
+    <%= form.text_field :product_search, class: 'product-search', placeholder: 'Buscar produto', data: { target: "opportunity-products.productSearch", action: "input->opportunity-products#searchProduct" } %>
+    <%= form.hidden_field :product_id, data: { target: "opportunity-products.productId" } %>
+    <div class="product-results dropdown-results" data-target="opportunity-products.productResults"></div>
+  </td>
+
+  <td>
+    <%= form.text_field :price, class: 'price', readonly: true, data: { target: "opportunity-products.price" } %>
+  </td>
+  <td>
+    <%= form.number_field :quantity, class: 'quantity', min: 1, data: { target: "opportunity-products.quantity", action: "input->opportunity-products#calculateSubtotal" } %>
+  </td>
+  <td>
+    <%= form.text_field :subtotal_price, class: 'subtotal', readonly: true, data: { target: "opportunity-products.subtotal" } %>
+  </td>
+  <td>
+    <%= link_to_remove_association 'Remover', form %>
+  </td>
+</tr>
