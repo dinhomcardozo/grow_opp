@@ -1,6 +1,9 @@
-import { Application } from "@hotwired/stimulus";
-import { definitionsFromContext } from "@hotwired/stimulus-webpack-helpers";
+import { Application } from "@hotwired/stimulus"
 
-const application = Application.start();
-const context = require.context("./", true, /\.js$/); // Carrega todos os arquivos .js nesta pasta
-application.load(definitionsFromContext(context));
+const application = Application.start()
+
+// Configure Stimulus development experience
+application.debug = false
+window.Stimulus   = application
+
+export { application }

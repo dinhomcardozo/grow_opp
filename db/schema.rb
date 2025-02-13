@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_09_010208) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_11_223422) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -120,6 +120,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_09_010208) do
     t.text "description"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.bigint "contact_id", null: false
+    t.index ["contact_id"], name: "index_opportunities_on_contact_id"
   end
 
   create_table "opportunity_company", id: :serial, force: :cascade do |t|
@@ -145,6 +147,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_09_010208) do
     t.decimal "subtotal_price"
     t.decimal "total_price"
     t.decimal "price", precision: 10, scale: 2
+    t.decimal "discount", precision: 10, scale: 2
     t.index ["opportunity_id"], name: "index_opportunity_products_on_opportunity_id"
     t.index ["product_id"], name: "index_opportunity_products_on_product_id"
   end
@@ -256,6 +259,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_09_010208) do
   add_foreign_key "contract_products", "contracts"
   add_foreign_key "contract_products", "products"
   add_foreign_key "contracts", "opportunities"
+  add_foreign_key "opportunities", "contacts"
   add_foreign_key "opportunity_company", "companies", name: "opportunity_company_company_id_fkey", on_delete: :cascade
   add_foreign_key "opportunity_company", "opportunities", name: "opportunity_company_opportunity_id_fkey", on_delete: :cascade
   add_foreign_key "opportunity_contact", "contacts", name: "fk_opportunity_contact_contact_id", on_delete: :cascade

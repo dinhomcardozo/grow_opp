@@ -32,10 +32,9 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1 or /products/1.json
   def update
     assign_virtual_attributes_to_product
-
     respond_to do |format|
       if @product.update(product_attributes)
-        format.html { redirect_to @product, notice: "Product was successfully updated." }
+        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,5 +62,10 @@ class ProductsController < ApplicationController
       params.require(:product).permit(
         :product_type, :description, :price, :status, :license_id
       )
+    end
+
+    def assign_virtual_attributes_to_product
+      # Exemplo: Atribuir um valor virtual ao produto antes da atualização
+      @product.assign_attributes(some_virtual_attribute: params[:some_virtual_attribute])
     end
 end

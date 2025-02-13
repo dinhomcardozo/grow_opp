@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
     belongs_to :client 
-    belongs_to :company#, optional: true
+    belongs_to :company, optional: true
     has_many :company_contacts
     has_many :opportunities
     
@@ -28,5 +28,10 @@ class Contact < ApplicationRecord
         'Saúde e Segurança no Trabalho (SST)', 'Suporte Técnico', 'Tecnologia da Informação (TI)',
         'Tesouraria', 'Vendas', 'Outros'
       ]
+    end
+
+    # Método para retornar o nome completo
+    def full_name
+      "#{first_name} #{last_name}"
     end
 end

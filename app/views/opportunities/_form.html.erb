@@ -10,58 +10,71 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :contact_id, "Contato" %>
-    <%= form.collection_select :contact_id, Contact.all, :id, :full_name, { include_blank: "Selecione um contato" }, class: 'form-control' %>
-  </div>
-
-  <div>
-    <%= form.label :email, "E-mail" %>
-    <%= form.text_field :email, readonly: true, class: 'form-control' %>
-  </div>
-
-  <div>
-    <%= form.label :phone, "Telefone" %>
-    <%= form.text_field :phone, readonly: true, class: 'form-control' %>
-  </div>
-
-  <div>
-    <%= form.label :cnpj, "CNPJ" %>
-    <%= form.text_field :cnpj, readonly: true, class: 'form-control' %>
-  </div>
-
-  <div>
-    <%= form.label :company_name, "Razão Social" %>
-    <%= form.text_field :company_name, readonly: true, class: 'form-control' %>
-  </div>
-
-  <div>
-    <%= form.label :notes, "Anotações" %>
-    <%= form.text_area :notes, rows: 5, class: 'form-control' %>
+  <div data-controller="contact-autofill">
+    <div>
+      <%= form.label :contact_id, "Contato" %>
+      <%= form.collection_select :contact_id, Contact.all, :id, :full_name,
+          { include_blank: "Selecione um contato" },
+          { class: 'form-control', data: { action: "change->contact-autofill#handleContactChange" } } %>
+    </div>
+    <div>
+      <%= form.label :email, "E-mail" %>
+      <%= form.text_field :email, readonly: true, class: 'form-control', data: { contact_autofill_target: "email" } %>
+    </div>
+    <div>
+      <%= form.label :phone, "Telefone" %>
+      <%= form.text_field :phone, readonly: true, class: 'form-control', data: { contact_autofill_target: "phone" } %>
+    </div>
+    <div>
+      <%= form.label :cnpj, "CNPJ" %>
+      <%= form.text_field :cnpj, readonly: true, class: 'form-control', data: { contact_autofill_target: "cnpj" } %>
+    </div>
+    <div>
+      <%= form.label :company_name, "Razão Social" %>
+      <%= form.text_field :company_name, readonly: true, class: 'form-control', data: { contact_autofill_target: "companyName" } %>
+    </div>
+    <div>
+      <%= form.label :description, "Descrição" %>
+      <%= form.text_area :description, rows: 5, class: 'form-control' %>
+    </div>
   </div>
 
   <h3>Produtos</h3>
   <%= form.fields_for :opportunity_products do |op_form| %>
-    <div>
-      <%= op_form.label :product_id, "Produto" %>
-      <%= op_form.collection_select :product_id, Product.all, :id, :description, { include_blank: "Selecione um produto" }, class: 'form-control' %>
-    </div>
-
-    <div>
-      <%= op_form.label :quantity, "Quantidade" %>
-      <%= op_form.number_field :quantity, class: 'form-control', min: 1 %>
-    </div>
-
-    <div>
-      <%= op_form.label :discount, "Desconto (R$)" %>
-      <%= op_form.number_field :discount, class: 'form-control', step: 0.01, min: 0 %>
-    </div>
-
-    <div>
-      <%= op_form.label :subtotal_price, "Subtotal (R$)" %>
-      <%= op_form.number_field :subtotal_price, readonly: true, class: 'form-control' %>
+    <div data-controller="product-calculator">
+      <div>
+        <%= op_form.label :product_id, "Produto" %>
+        <%= collection_select_with_data(Product.all, :id, :description, { include_blank: "Selecione um produto" }, { class: 'form-control', data: { action: "change->product-calculator#updatePriceAndCalculate" } }) %>
+      </div>
+      <div>
+        <%= op_form.label :price, "Preço Unitário (R$)" %>
+        <%= op_form.number_field :price, readonly: true, class: 'form-control', data: { product_calculator_target: "price" } %>
+      </div>
+      <div>
+        <%= op_form.label :quantity, "Quantidade" %>
+        <%= op_form.number_field :quantity, class: 'form-control', min: 1, data: { 
+          product_calculator_target: "quantity", 
+          action: "input->product-calculator#calculateSubtotal" 
+        } %>
+      </div>
+      <div>
+        <%= op_form.label :discount, "Desconto (R$)" %>
+        <%= op_form.number_field :discount, class: 'form-control', step: 0.01, min: 0, data: { 
+          product_calculator_target: "discount", 
+          action: "input->product-calculator#calculateSubtotal" 
+        } %>
+      </div>
+      <div>
+        <%= op_form.label :subtotal_price, "Subtotal (R$)" %>
+        <%= op_form.number_field :subtotal_price, readonly: true, class: 'form-control', data: { product_calculator_target: "subtotal" } %>
+      </div>
     </div>
   <% end %>
+
+    <p>
+      <%= form.label :total_price, "Total (R$)" %>
+      <%= number_field_tag :total_price, nil, readonly: true, class: 'form-control', data: { product_calculator_target: "total" } %>
+    </p>
 
   <div>
     <%= form.submit "Salvar", class: 'btn btn-primary' %>

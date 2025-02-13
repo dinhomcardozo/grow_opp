@@ -8,7 +8,13 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1 or /contacts/1.json
   def show
-    @contact = Contact.find(params[:id])
+    @contact = Contact.includes(:company).find(params[:id]) # Inclui a empresa associada
+    render json: @contact.as_json(
+      only: [:id, :first_name, :last_name, :email, :phone],
+      include: {
+        company: { only: [:cnpj, :company_name] } # Inclui os campos da empresa
+      }
+    )
   end
 
   # GET /contacts/new
