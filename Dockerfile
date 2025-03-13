@@ -9,11 +9,11 @@ RUN apt-get update -qq && apt-get install -y \
     wget \
     gnupg2
 
-# Adicione o repositório oficial do PostgreSQL para instalar o cliente PostgreSQL 16
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt bullseye-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
+# Adicione o repositório oficial do PostgreSQL para Debian 12 (Bookworm)
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt bookworm-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
-# Instale o cliente PostgreSQL 16
+# Atualize os pacotes e instale o cliente PostgreSQL 16
 RUN apt-get update && apt-get install -y postgresql-client-16
 
 # Configure o diretório de trabalho
