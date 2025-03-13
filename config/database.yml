@@ -12,9 +12,3 @@ development:
 test:
   <<: *default
   database: grow_opp_test
-
-#production:
-#  <<: *default
-#  database: grow_opp_production
-#  username: bookshelf
-#  password: <%= ENV['BOOKSHELF_DATABASE_PASSWORD'] %>
